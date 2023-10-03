@@ -40,9 +40,9 @@ def home():
     if request.method == 'POST':
 
 
-        return render_template('main.html')
+        return render_template('dashboard.html')
     else:
-        return render_template('main.html')
+        return render_template('dashboard.html')
 
 
 
@@ -60,7 +60,7 @@ def login():
     if len(rows) != 1:
         return "ERROR 403"
 
-    if check_password_hash(rows[0]["hash"], request.form.get("password")) == True:
+    if check_password_hash(rows[0]["hash"], password) == True:
         session["user_id"] = rows[0]["id"]
         return redirect('/')
 
