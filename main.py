@@ -4,14 +4,18 @@ from flask_mysqldb import MySQL
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import insert, update, select
-import urllib
+import mysql.connector
+import mysql
+
 app = Flask(__name__)
 Session(app)
 
 
+
+
+
+
 mysql = MySQL(app)
-
-
 
 def login_required(f):
     @wraps(f)
@@ -31,11 +35,12 @@ def after_request(response):
 
 @app.route('/',methods=['GET','POST'])
 def home():
+
     db = mysql.connection.cursor()
-    names = db.execute("SELECT 1 FROM test")
+    db.execute("SELECT id FROM test")
+    names=db.fetchall()
     mysql.connection.commit()
     db.close()
-
     if request.method == 'POST':
 
         return render_template('dashboard.html',names=names)
