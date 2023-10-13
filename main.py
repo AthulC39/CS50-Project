@@ -75,7 +75,14 @@ def assignments():
 @login_required
 def submit():
     if request.method == 'POST':
-
+        assignment_name=request.form.get('aName')
+        class_name=request.form.get('class')
+        file = request.form.get('file')
+        db = mysql.connection.cursor()
+        db.execute("INSERT INTO assignments (name,class,file) VALUES (%s,%s,%s)",[assignment_name,class_name,str(file)])
+        mysql.connection.commit()
+        db.close()
+        flash('Assignment submitted sucessfully!')
         return redirect('/assignments')
     else:
 
