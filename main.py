@@ -71,6 +71,29 @@ def assignments():
 
         return render_template('assignments.html')
 
+@app.route('/settings',methods=['GET','POST'])
+@login_required
+def settings():
+    if request.method == 'POST':
+        username = request.form.get("username")
+        password = request.form.get("password")
+        new_password = generate_password_hash(password, method='sha256', salt_length=16)
+
+        if not username:
+            return apology("must provide username", 400)
+
+        if not password:
+            return apology("must provide password", 400)
+        db = mysql.connection.cursor()
+        db.execute("UPDATE students SET hash = %s WHERE id = 1",[new_password])
+        mysql.connection.commit()
+        flash(f" You changed password to {password}!")
+        return render_template("settings.html", username=username, password=password)
+    else:
+
+
+        return render_template('settings.html')
+
 @app.route('/submit',methods=['GET','POST'])
 @login_required
 def submit():

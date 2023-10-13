@@ -1,11 +1,22 @@
+
 {% extends "main.html" %}
 
 {% block title %}
-    Settings
+    Register for an account
 {% endblock %}
-
 
 {% block main %}
+    <h1 class="coolHeader">Change Password</h1>
+    <br>
+    <form action="/settings" method="post">
+        <input autocomplete="off" autofocus  name="username" id="username" placeholder="Enter username" type="text">
+        <input autocomplete="off" autofocus  name="password" id="password" placeholder="Enter new password" type="password">
+    <button type="submit">Change Password</button>
 
+    </form>
+
+    <br>
 
 {% endblock %}
+
+
