@@ -46,20 +46,94 @@ def home():
 
 
     if request.method == 'POST':
-        db = mysql.connection.cursor()
-        db.execute("SELECT username FROM students WHERE id = 1")
-        sesh = db.fetchall()
-        mysql.connection.commit()
 
-        return render_template('dashboard.html',sesh=sesh)
+
+        return render_template('dashboard.html')
     else:
         db = mysql.connection.cursor()
+        db.execute("SELECT * FROM students WHERE id = 1")
+        sesh = db.fetchall()
+        username = (sesh[0][1])
+        mysql.connection.commit()
+        db.execute("SELECT * FROM marks WHERE markid = 1")
+        marks = db.fetchall()
+        studentMarks = marks[0]
+        return render_template('dashboard.html',username=username,marks=studentMarks)
+
+@app.route('/assignments',methods=['GET','POST'])
+@login_required
+def assignments():
+    if request.method == 'POST':
+
+        return render_template('submit.html')
+    else:
+
+
+        return render_template('assignments.html')
+
+@app.route('/submit',methods=['GET','POST'])
+@login_required
+def submit():
+    if request.method == 'POST':
+
+        return redirect('/assignments')
+    else:
+
+
+        return render_template('submit.html')
+
+
+
+@app.route('/forum',methods=['GET','POST'])
+@login_required
+def forum():
+
+
+    if request.method == 'POST':
+
+
+        return render_template('forum.html')
+    else:
+        db = mysql.connection.cursor()
+        mysql.connection.commit()
+        db.execute("SELECT COUNT(commentid) FROM comments")
+        count = db.fetchall()
+        return render_template('forum.html',count=count)
+
+@app.route('/post1',methods=['GET','POST'])
+@login_required
+def post1():
+    if request.method == 'POST':
+        text = request.form.get('post1')
+        db = mysql.connection.cursor()
         db.execute("SELECT username FROM students WHERE id = 1")
         sesh = db.fetchall()
         mysql.connection.commit()
-        return render_template('dashboard.html',sesh=sesh)
+        db.execute("SELECT COUNT(commentid) FROM comments")
+        count = db.fetchall()
+        temp = count[0][0] + 1
+        db.execute("INSERT INTO comments VALUES (%s,%s,%s)",[str(temp),text,sesh[0][0]])
+
+        mysql.connection.commit()
+        db.close()
+
+        return redirect("post1")
+    else:
+
+        db = mysql.connection.cursor()
+        db.execute("SELECT username FROM students WHERE id = 1")
+        sesh = db.fetchall()
+        mysql.connection.commit()
 
 
+        db.execute("SELECT * FROM comments")
+        posts = db.fetchall()
+        mysql.connection.commit()
+        db.execute("SELECT COUNT(commentid) FROM comments")
+        count = db.fetchall()
+        mysql.connection.commit()
+        db.close()
+        return render_template('post1.html',user=sesh,posts=posts,count=count)
 
 @app.route('/login',methods=['GET','POST'])
 def login():

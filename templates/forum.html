@@ -1,0 +1,89 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Class Forum
+{% endblock %}
+
+
+{% block main %}
+
+<ol>
+    <div class="top-bar"><h1 class="coolHeader">Class Forums</h1></div>
+     <br><br>
+    <li class="row" style="background: #D3D3D3;">
+
+    <a href="/post1" class="link" style="text-decoration: none; color: black">
+        <h3 class="coolHeader2">
+            Limits Homework
+        </h3>
+        <div class="bottom">
+           <p class="timestamp">
+               10/21/2023
+           </p>
+            <p class="comment-count">
+                {{ count[0][0] }} Comments
+            </p>
+
+        </div>
+
+    </a>
+    </li>
+
+    <li class="row" style="background: #D3D3D3;">
+    <a href="/post1" style="text-decoration: none; color: black">
+        <h3 class="coolHeader2">
+            Derivatives Take-home Assignment
+        </h3>
+        <div class="bottom">
+           <p class="timestamp" style="margin: 10px">
+                10/21/2023
+           </p>
+            <p class="comment-count">
+                2 Comments
+            </p>
+
+        </div>
+
+    </a>
+    </li>
+    <li class="row" style="background: #D3D3D3;">
+
+    <a href="/post1" class="link" style="text-decoration: none; color: black">
+        <h3 class="coolHeader2">
+            Limit Laws and Applications
+        </h3>
+        <div class="bottom">
+           <p class="timestamp">
+               3/21/2023
+           </p>
+            <p class="comment-count">
+                5 Comments
+            </p>
+
+        </div>
+
+    </a>
+    </li>
+    <li class="row" style="background: #D3D3D3;">
+
+    <a href="/post1" class="link" style="text-decoration: none; color: black">
+        <h3 class="coolHeader2">
+            Optimization
+        </h3>
+        <div class="bottom">
+           <p class="timestamp">
+               12/21/2023
+           </p>
+            <p class="comment-count">
+                7 Comments
+            </p>
+
+        </div>
+
+    </a>
+    </li>
+</ol>
+
+
+
+{% endblock %}

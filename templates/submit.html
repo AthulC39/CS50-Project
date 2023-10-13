@@ -1,0 +1,24 @@
+
+{% extends "main.html" %}
+
+{% block title %}
+   Submit assignment
+{% endblock %}
+
+{% block main %}
+    <form action="/submit" method="post">
+        <div class="top-bar"><h1 class="coolHeader">Submit Your Assignments</h1></div>
+        <br><br>
+        <h2 style="color: grey;">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="aName" name="aName" placeholder="Assignment Name" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="class" name="class" placeholder="Class Name" type="text">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        </h2>
+
+
+
+
+    </form>
+{% endblock %}
+
+
